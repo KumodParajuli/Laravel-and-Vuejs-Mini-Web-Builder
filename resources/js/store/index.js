@@ -5,18 +5,19 @@ export default createStore({
 
     state: {
          token: localStorage.getItem('token') || '',
-        isAuthenticated: localStorage.getItem('isAuthenticated') === 'true'
+        isAuthenticated: localStorage.getItem('isAuthenticated') === 'true',
+        status: localStorage.getItem('isAuthenticated') === 'true'
     },
 
     mutations: {
 
-        UpdateAuthenticationStatus (state, status) {
-            state.isAuthenticated = status;
-            localStorage.setItem('isAuthenticated',status)
-        },
+        // UpdateAuthenticationStatus (state, status) {
+        //     state.status = status;
+        //     localStorage.setItem('isAuthenticated',status)
+        // },
 
         UpdateAuthStatus(state,status){
-            state.isAuthenticated = status;
+            state.status = status;
             localStorage.setItem('isAuthenticated',status)
         },
 
@@ -39,7 +40,7 @@ export default createStore({
             axios.get('api/auth-status')
             .then( response => {
                commit('UpdateAuthStatus',response.data.status)
-               commit('UpdateAuthenticationStatus',response.data.status)
+            //    commit('UpdateAuthenticationStatus',response.data.isAuthenticated)
             })
             .catch(error => {
                 console.log(error)
@@ -48,18 +49,19 @@ export default createStore({
 
         SetAuthStatus( {commit}, status ){
             commit('UpdateAuthStatus', status);
-            commit('UpdateAuthenticationStatus',status);
+            // commit('UpdateAuthenticationStatus',status);
         },
 
         setAuthToken({commit},token){
             commit('UpdateToken',token)
         },
 
-        logout({commit}){
+        logout({commit}, status){
             commit('resetAuth')
             localStorage.removeItem('token')
             localStorage.removeItem('isAuthenticated')
             delete axios.defaults.headers.common['Authorization']
+            commit('UpdateAuthStatus', status);
         }
 
     },

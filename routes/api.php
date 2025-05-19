@@ -3,6 +3,10 @@
 use App\Http\Controllers\API\V1\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\WebPageController;
+use App\Http\Controllers\Api\V1\WebsiteSettingController;
+use App\Http\Controllers\Api\V1\NavigationController;
+use App\Http\Controllers\Api\V1\PageBannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +30,27 @@ Route::middleware('auth:sanctum')->get('/auth-status', function () {
     ]);
 });
 
-Route::middleware(['auth:sanctum'])->group( function() {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('/pages', [WebPageController::class, 'index']);
+    Route::post('/pages', [WebPageController::class, 'store']);
+    Route::get('/pages/{id}', [WebPageController::class, 'show']);
+    Route::put('/pages/{id}', [WebPageController::class, 'update']);
+    Route::delete('/pages/{id}', [WebPageController::class, 'destroy']);
     // Route::post('auth-status', [AuthController::class, 'checkUserStatus']);
+
+    Route::get('/settings', [WebsiteSettingController::class, 'index']);
+    Route::put('/settings', [WebsiteSettingController::class, 'update']);
+    Route::get('/pagessettings', [WebsiteSettingController::class, 'pages']);
+
+    Route::get('/navigations', [NavigationController::class, 'index']);
+    Route::post('/navigations', [NavigationController::class, 'store']);
+    // Route::put('/navigations/{navigation}', [NavigationController::class, 'update']);
+    // Route::delete('/navigations/{navigation}', [NavigationController::class, 'destroy']);
+    // Route::post('/navigations/reorder', [NavigationController::class, 'reorder']);
+
+    Route::get('/banner/{pageId}', [PageBannerController::class, 'show']);
+    Route::post('/banner', [PageBannerController::class, 'store']);
 });
 
 Route::post('register', [AuthController::class, 'register']);

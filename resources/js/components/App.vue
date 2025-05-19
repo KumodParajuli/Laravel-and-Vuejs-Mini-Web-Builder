@@ -7,9 +7,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-            <li class="nav-item">
-            <router-link to="/" class="nav-link  " aria-current="page" >Home</router-link>
+          
+            <li class="nav-item" v-if="isAuthenticated">
+                <router-link to="/pages" class="nav-link  " aria-current="page" >Site Pages</router-link>
             </li>
+            <li class="nav-item" v-if="isAuthenticated">
+                <router-link to="/settings" class="nav-link  " aria-current="settings" >Site Setting</router-link>
+            </li>
+            <li class="nav-item" v-if="isAuthenticated">
+                <router-link to="/navigation" class="nav-link  " aria-current="navigation" >Site Menu</router-link>
+            </li>
+            
         </ul>
         </div>
         <div class="d-flex">
@@ -30,16 +38,20 @@
     export default {
          mounted() {
             
-            this.$store.dispatch('checkUserAuthenticationStatus');
+            //this.$store.dispatch('UpdateAuthStatus'); 
+
         },
         computed: {
+
             isAuthenticated(){
-                return this.$store.state.isAuthenticated
+                return this.$store.state.status;
             }, 
             authToken(){
-                return this.$store.state.token
+                return this.$store.state.token;
             },
+            
         },
+        
        
         methods: {
             logout() { 

@@ -13,7 +13,22 @@
         "vite": "^6.3.5"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^6.7.2",
+        "@inertiajs/vue3": "^2.0.11",
+        "@tiptap/extension-code-block": "^2.12.0",
+        "@tiptap/extension-highlight": "^2.12.0",
+        "@tiptap/extension-image": "^2.12.0",
+        "@tiptap/extension-link": "^2.12.0",
+        "@tiptap/extension-text-align": "^2.12.0",
+        "@tiptap/extension-underline": "^2.12.0",
+        "@tiptap/starter-kit": "^2.12.0",
+        "@tiptap/vue-3": "^2.12.0",
+        "@vueup/vue-quill": "^1.2.0",
+        "bootstrap": "^5.3.6",
+        "quill": "^2.0.3",
         "vue-router": "^4.5.1",
+        "vue3-quill": "^0.3.1",
+        "vuedraggable": "^4.1.0",
         "vuex": "^4.0.2"
     }
 }

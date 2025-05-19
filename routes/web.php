@@ -1,5 +1,6 @@
 <?php
 
+use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('{any?}', function () {
+Route::get('/', function () {
+    return view('site');
+});
+
+Route::get('/admin', function () {
     return view('app');
-})->where('any','.*');
+})->where('any', '.*');
+
+// Route::get('/pages', function () {
+//     return Inertia::render('LiveEditor');
+// })->middleware(['auth']);
