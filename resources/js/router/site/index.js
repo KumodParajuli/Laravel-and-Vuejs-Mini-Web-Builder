@@ -1,28 +1,34 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Site from '../../components/site/Sitehome.vue';
+import Page from '../../components/site/Page.vue';
+import Home from '../../components/site/Home.vue';
 import NotFound from '../../components/site/404.vue';
  
 
 const routes = [
      {
-        path: '/:any',
-        name: 'notfound',
-        component: NotFound
-    },
-    {
-        path: '/',
-        name: 'Site',
-        component: Site
-    }
-   
+    path: '/site/:id',
+    name: 'Innerpage',
+    component: Page,
+    props: true,
+  },
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
+    // props: { id: 0 }, // Optional: send default prop
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound
+  }
+       
 ];
 
+
 const router = createRouter({
-    history: createWebHistory(),
-    routes,
-    linkActiveClass: 'active'
-});
+  history: createWebHistory(), // Make sure you're using web history
+  routes,
+})
 
- 
-
-export default router;
+export default router

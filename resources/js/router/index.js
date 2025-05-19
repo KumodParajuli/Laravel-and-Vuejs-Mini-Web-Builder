@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from '../components/Home.vue';
+// import Home from '../components/Home.vue';
 import Register from '../components/Auth/Register.vue';
 import Login from '../components/Auth/Login.vue';
 import Dashboard from '../components/Auth/Dashboard.vue';
@@ -8,17 +8,20 @@ import store from '../store/index.js';
 import Pages from '../components/Pages/LiveEditor.vue';
 import Navigation from '../components/Settings/Navigation.vue';
 import Settings from '../components/Settings/Settings.vue';
-import Banner from '../components/Settings/BannerEditor.vue';
+import Banner from '../components/Settings/BannerEditor.vue'; 
+
+// import Website from '../components/site/site.vue';
 const routes = [
   {
     path: '/:any',
     name: 'notfound',
     component: NotFound
-  },
+  }
+  ,
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/admin',
+    name: 'Admin',
+    component: Login
   }
   ,
   {
@@ -37,12 +40,6 @@ const routes = [
     component: Dashboard,
   },
   {
-    path: '/pages',
-    name: 'create',
-    component: Pages,
-  },
-  ,
-  {
     path: '/settings',
     name: 'Settings',
     component: Settings,
@@ -56,6 +53,11 @@ const routes = [
     path: '/banner/:id',
     name: 'Banner',
     component: Banner,
+  },
+  {
+      path: '/pages',
+      name: 'Pages',
+      component: Pages
   }
 ];
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\WebPageController;
 use App\Http\Controllers\Api\V1\WebsiteSettingController;
 use App\Http\Controllers\Api\V1\NavigationController;
 use App\Http\Controllers\Api\V1\PageBannerController;
+use App\Http\Controllers\Api\V1\FrontController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/pages/{id}', [WebPageController::class, 'show']);
     Route::put('/pages/{id}', [WebPageController::class, 'update']);
     Route::delete('/pages/{id}', [WebPageController::class, 'destroy']);
-    // Route::post('auth-status', [AuthController::class, 'checkUserStatus']);
 
     Route::get('/settings', [WebsiteSettingController::class, 'index']);
     Route::put('/settings', [WebsiteSettingController::class, 'update']);
@@ -45,9 +45,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/navigations', [NavigationController::class, 'index']);
     Route::post('/navigations', [NavigationController::class, 'store']);
-    // Route::put('/navigations/{navigation}', [NavigationController::class, 'update']);
-    // Route::delete('/navigations/{navigation}', [NavigationController::class, 'destroy']);
-    // Route::post('/navigations/reorder', [NavigationController::class, 'reorder']);
 
     Route::get('/banner/{pageId}', [PageBannerController::class, 'show']);
     Route::post('/banner', [PageBannerController::class, 'store']);
@@ -55,3 +52,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+
+// route for front site
+ Route::get('/site_settings', [WebsiteSettingController::class, 'index']);
+ Route::get('/site_navigation', [NavigationController::class, 'index']);
+ Route::get('/page_detail/{id}', [WebPageController::class, 'show']);
+ Route::get('/page_banner/{pageId}', [PageBannerController::class, 'show']);

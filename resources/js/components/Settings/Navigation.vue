@@ -20,7 +20,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <div>
           <strong>{{ item.label }}</strong><br />
-          <small>Page: {{ getPageTitle(item.page_id)  }}sss</small>
+          <small>Page: {{ getPageTitle(item.page_id)  }}</small>
         </div>
         <div>
           <button @click="shiftUp(index)" class="btn btn-sm btn-secondary me-1" :disabled="index === 0">↑</button>
