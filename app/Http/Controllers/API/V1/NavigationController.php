@@ -32,29 +32,29 @@ class NavigationController extends Controller
 
     public function store(Request $request)
     {
-        
+
         $navigation = $request->input('navigation'); // expecting array of items
-    // Validate structure
-            $request->validate([
-                'navigation' => 'required|array',
-                'navigation.*.label' => 'required|string|max:255',
-                'navigation.*.page_id' => 'required|integer|exists:web_pages,id',
-                'navigation.*.order' => 'required|integer'
+        // Validate structure
+        $request->validate([
+            'navigation' => 'required|array',
+            'navigation.*.label' => 'required|string|max:255',
+            'navigation.*.page_id' => 'required|integer|exists:web_pages,id',
+            'navigation.*.order' => 'required|integer'
+        ]);
+
+        // Delete all existing navigation items
+        NavigationItem::truncate();
+
+        // Insert new navigation items
+        foreach ($navigation as $item) {
+            NavigationItem::create([
+                'label' => $item['label'],
+                'page_id' => $item['page_id'],
+                'order' => $item['order'],
             ]);
+        }
 
-            // Delete all existing navigation items
-            NavigationItem::truncate();
-
-            // Insert new navigation items
-            foreach ($navigation as $item) {
-                NavigationItem::create([
-                    'label' => $item['label'],
-                    'page_id' => $item['page_id'],
-                    'order' => $item['order'],
-                ]);
-            }
-
-            return response()->json(['message' => 'Navigation updated successfully.'], 200);
+        return response()->json(['message' => 'Navigation updated successfully.'], 200);
     }
 
     public function update(Request $request, NavigationItem $navigation)
@@ -78,4 +78,3 @@ class NavigationController extends Controller
         return response()->json(['message' => 'Reordered successfully']);
     }
 }
-

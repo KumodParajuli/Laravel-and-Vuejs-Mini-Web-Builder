@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\Api\V1;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\WebPage;
@@ -13,12 +15,12 @@ class WebPageController extends Controller
 
     public function store(Request $request)
     {
-               
+
         $request->validate([
             'title' => 'required|string|max:255',
             'html_content' => 'required|string',
         ]);
-       
+
         return WebPage::create($request->only('title', 'html_content'));
     }
 

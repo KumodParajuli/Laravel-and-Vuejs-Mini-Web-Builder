@@ -4,8 +4,8 @@
       <div class="col-12 mt-5">
         <div class="card">
           <div class="card-header">
-            Page Banner | <router-link to="/pages" class="btn btn-sm btn-info me-2"
-                aria-current="page"> << Go Back </router-link>
+            Page Banner | <router-link to="/pages" class="btn btn-sm btn-info me-2" aria-current="page">
+              << Go Back </router-link>
           </div>
           <div>
             <input v-model="banner.title" placeholder="Banner Title" class="form-control mb-2" />

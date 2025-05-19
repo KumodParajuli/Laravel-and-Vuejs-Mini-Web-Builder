@@ -20,11 +20,12 @@
       <div class="d-flex justify-content-between align-items-center">
         <div>
           <strong>{{ item.label }}</strong><br />
-          <small>Page: {{ getPageTitle(item.page_id)  }}</small>
+          <small>Page: {{ getPageTitle(item.page_id) }}</small>
         </div>
         <div>
           <button @click="shiftUp(index)" class="btn btn-sm btn-secondary me-1" :disabled="index === 0">↑</button>
-          <button @click="shiftDown(index)" class="btn btn-sm btn-secondary me-1" :disabled="index === navigation.length - 1">↓</button>
+          <button @click="shiftDown(index)" class="btn btn-sm btn-secondary me-1"
+            :disabled="index === navigation.length - 1">↓</button>
           <button @click="editItem(index)" class="btn btn-sm btn-warning me-1">Edit</button>
           <button @click="deleteItem(index)" class="btn btn-sm btn-danger">Delete</button>
         </div>
@@ -64,7 +65,7 @@ onMounted(async () => {
   loadNavigation()
 })
 
-const getPageTitle = (pageId) => { 
+const getPageTitle = (pageId) => {
   const page = pages.value.find(p => p.id === pageId)
   return page ? page.title : 'Unknown Page'
 }
@@ -119,13 +120,13 @@ const reorderNavigation = () => {
   })
 }
 
-const saveNavigation = async () => { 
+const saveNavigation = async () => {
   await axios.post('/api/navigations', { navigation: navigation.value })
   alert('Navigation saved successfully!')
 }
 
 const loadNavigation = async () => {
   const res = await axios.get('/api/navigations')
-  navigation.value = res.data.navigation || [] 
+  navigation.value = res.data.navigation || []
 }
 </script>

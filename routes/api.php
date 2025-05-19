@@ -54,7 +54,7 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 // route for front site
- Route::get('/site_settings', [WebsiteSettingController::class, 'index']);
- Route::get('/site_navigation', [NavigationController::class, 'index']);
- Route::get('/page_detail/{id}', [WebPageController::class, 'show']);
- Route::get('/page_banner/{pageId}', [PageBannerController::class, 'show']);
+Route::get('/site_settings', [WebsiteSettingController::class, 'index']);
+Route::get('/site_navigation', [NavigationController::class, 'index']);
+Route::get('/page_detail/{id}', [WebPageController::class, 'show']);
+Route::get('/page_banner/{pageId}', [PageBannerController::class, 'show']);

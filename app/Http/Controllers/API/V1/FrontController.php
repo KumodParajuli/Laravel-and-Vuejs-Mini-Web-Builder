@@ -7,9 +7,8 @@ use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
-    public function index(){
-       return false;
+    public function index()
+    {
+        return false;
     }
-
-    
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller; 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\API\V1\Auth\UpdateSettingRequest;
 use App\Models\WebPage;
 use App\Models\WebsiteSetting;
@@ -11,7 +11,7 @@ class WebsiteSettingController extends Controller
 {
     public function index()
     {
-       // return 1;
+        // return 1;
         return WebsiteSetting::first();
     }
 
