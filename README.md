@@ -10,8 +10,8 @@ Requirements:
 Steps:
 
 1. Clone the repository:
-   git clone https://github.com/your-username/your-repo.git
-   cd your-repo
+   git clone https://github.com/KumodParajuli/Laravel-and-Vuejs-Mini-Web-Builder.git
+   cd Laravel-and-Vuejs-Mini-Web-Builder
 
 2. Install PHP dependencies:
    composer install
