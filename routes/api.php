@@ -3,11 +3,11 @@
 use App\Http\Controllers\API\V1\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\WebPageController;
-use App\Http\Controllers\Api\V1\WebsiteSettingController;
-use App\Http\Controllers\Api\V1\NavigationController;
-use App\Http\Controllers\Api\V1\PageBannerController;
-use App\Http\Controllers\Api\V1\FrontController;
+use App\Http\Controllers\API\V1\WebPageController;
+use App\Http\Controllers\API\V1\WebsiteSettingController;
+use App\Http\Controllers\API\V1\NavigationController;
+use App\Http\Controllers\API\V1\PageBannerController;
+use App\Http\Controllers\API\V1\FrontController;
 
 /*
 |--------------------------------------------------------------------------

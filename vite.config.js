@@ -6,7 +6,7 @@ import { template } from 'lodash';
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: ['resources/css/app.css', 'resources/js/app.js','resources/js/site.js'],
             refresh: true,
         }),
         vue({
@@ -23,4 +23,10 @@ export default defineConfig({
             vue: 'vue/dist/vue.esm-bundler.js',
         },
     },
+    // other settings
+  server: {
+    fs: {
+      allow: ['node_modules/@fortawesome/fontawesome-free'],
+    },
+  },
 });

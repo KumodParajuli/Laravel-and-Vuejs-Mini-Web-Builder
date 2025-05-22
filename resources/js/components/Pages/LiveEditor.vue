@@ -82,10 +82,19 @@
                     class="fas fa-align-center"></i></button>
                 <button @click="setAlign('right')" class="btn btn-outline-secondary btn-sm"><i
                     class="fas fa-align-right"></i></button>
+                <button @click="insertContentBlock" class="btn btn-outline-secondary btn-sm"
+                  title="Insert Content Block">
+                  <i class="fas fa-layer-group"></i> Block
+                </button>
+                <button @click="insertHeroBlock" class="btn btn-outline-primary btn-sm">Hero</button>
+                <button @click="insertFeaturesBlock" class="btn btn-outline-primary btn-sm">Features</button>
+                <button @click="insertImageTextBlock" class="btn btn-outline-primary btn-sm">Image+Text</button>
+                <button @click="insertTestimonialBlock" class="btn btn-outline-primary btn-sm">Testimonial</button>
+                <button @click="insertCTABlock" class="btn btn-outline-primary btn-sm">CTA</button>
               </div>
 
               <div class="card-body p-3">
-                <editor-content :editor="editor" class="editor-body form-control" />
+                <editor-content :editor="editor" class="editor-body form-control" style="min-height: 400px;" />
               </div>
 
               <div class="card-footer bg-white border-top" style="height: 1px; visibility: hidden;">
@@ -93,19 +102,7 @@
                 <textarea class="form-control" rows="5" v-model="htmlOutput" readonly />
               </div>
             </div>
-            <!-- <div class="row">
-              <div class="col-md-6">
-                <label class="form-label fw-bold">HTML Editor</label>
-                <textarea v-model="htmlContent" rows="16" class="form-control font-monospace"
-                  placeholder="Write HTML here..."></textarea>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label fw-bold">Live Preview</label>
-                <div class="border rounded p-2 bg-white" style="min-height: 400px;">
-                  <iframe :srcdoc="htmlContent" class="w-100" style="height: 100%; border: none;"></iframe>
-                </div>
-              </div>
-            </div> -->
+
           </div>
         </div>
       </div>
@@ -114,31 +111,103 @@
 </template>
 
 <script setup>
-// import TiptapEditor from '../../components/Pages/TiptapEditor.vue';
-// main.js
-import 'bootstrap-icons/font/bootstrap-icons.css'
-
-import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
+import { ref, onBeforeUnmount, onMounted } from 'vue'
 import { Editor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
 import Underline from '@tiptap/extension-underline'
 import Highlight from '@tiptap/extension-highlight'
 import Link from '@tiptap/extension-link'
 import Image from '@tiptap/extension-image'
-// import CodeBlock from '@tiptap/extension-code-block'
 import TextAlign from '@tiptap/extension-text-align'
 
-
 const htmlOutput = ref('')
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-
 const childRef = ref()
 const title = ref('')
 
 const pages = ref([])
 const editingId = ref(null)
 const editorRef = ref(null)
+
+const insertContentBlock = () => {
+  const title = "Block title"
+  const imageUrl = ''
+  const bodyText = 'Your body text here...'
+
+  if (!title || !bodyText) return
+
+  editor
+    .chain()
+    .focus()
+    .insertContent([
+      { type: 'heading', attrs: { level: 2 }, content: [{ type: 'text', text: title }] },
+      { type: 'image', attrs: { src: imageUrl, alt: title } },
+      { type: 'paragraph', content: [{ type: 'text', text: bodyText }] },
+    ])
+    .run()
+}
+
+const insertHeroBlock = () => {
+  editor
+    .chain()
+    .focus()
+    .insertContent([
+      { type: 'heading', attrs: { level: 1 }, content: [{ type: 'text', text: 'Welcome to Our Website!' }] },
+      { type: 'paragraph', content: [{ type: 'text', text: 'Discover amazing features and services we offer.' }] },
+      { type: 'image', attrs: { src: 'https://via.placeholder.com/800x300', alt: 'Hero Image' } },
+    ])
+    .run()
+}
+const insertFeaturesBlock = () => {
+  editor
+    .chain()
+    .focus()
+    .insertContent([
+      { type: 'heading', attrs: { level: 2 }, content: [{ type: 'text', text: 'Features' }] },
+      {
+        type: 'bulletList', content: [
+          { type: 'listItem', content: [{ type: 'paragraph', content: [{ type: 'text', text: 'Fast and Reliable' }] }] },
+          { type: 'listItem', content: [{ type: 'paragraph', content: [{ type: 'text', text: 'User-Friendly Interface' }] }] },
+          { type: 'listItem', content: [{ type: 'paragraph', content: [{ type: 'text', text: '24/7 Support' }] }] },
+        ]
+      }
+    ])
+    .run()
+}
+
+const insertImageTextBlock = () => {
+  editor
+    .chain()
+    .focus()
+    .insertContent([
+      { type: 'image', attrs: { src: 'https://via.placeholder.com/300x200', alt: 'Sample Image' } },
+      { type: 'paragraph', content: [{ type: 'text', text: 'This is a descriptive text accompanying the image.' }] },
+    ])
+    .run()
+}
+const insertTestimonialBlock = () => {
+  editor
+    .chain()
+    .focus()
+    .insertContent([
+      { type: 'paragraph', content: [{ type: 'text', text: '“This product changed my life!”' }] },
+      { type: 'paragraph', content: [{ type: 'text', text: '— Happy Customer' }] },
+    ])
+    .run()
+}
+const insertCTABlock = () => {
+  editor
+    .chain()
+    .focus()
+    .insertContent([
+      { type: 'heading', attrs: { level: 2 }, content: [{ type: 'text', text: 'Ready to Get Started?' }] },
+      { type: 'paragraph', content: [{ type: 'text', text: 'Join now and start your journey with us today.' }] },
+    ])
+    .run()
+}
+
 const fetchPages = async () => {
   const res = await axios.get('/api/pages')
   pages.value = res.data
@@ -185,7 +254,9 @@ const resetEditor = () => {
   title.value = ''
   editor.commands.setContent('<h1>Hello, world!</h1>')
 }
-
+onBeforeUnmount(() => {
+  editor.destroy()
+})
 onMounted(fetchPages)
 
 
@@ -202,9 +273,6 @@ const editor = new Editor({
   onUpdate: ({ editor }) => {
     htmlOutput.value = editor.getHTML()
   },
-})
-onBeforeUnmount(() => {
-  editor.destroy()
 })
 
 const toggle = (action) => {
@@ -225,7 +293,7 @@ const addLink = () => {
   if (url) editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
 }
 
-const setAlign = (align) => {
+function setAlign(align) {
   editor.chain().focus().setTextAlign(align).run()
 }
 
@@ -240,14 +308,25 @@ const buttonClass = (feature) => {
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 defineExpose({ editor, htmlOutput })
+
 </script>
 
 <style scoped>
 .editor-body {
-  min-height: 400px;
-  border: none;
+  border: 1px solid #ddd;
   background: #fdfdfd;
-  font-family: 'Segoe UI', sans-serif;
+  padding: 1rem;
+  overflow-y: auto;
+  height: 500px;
+}
+
+/* Target the actual editable content inside tiptap */
+::v-deep(.ProseMirror) {
+  min-height: 100%;
+  height: 100%;
+  padding: 10px;
+  overflow-y: auto;
+  outline: none;
 }
 
 .btn.active {

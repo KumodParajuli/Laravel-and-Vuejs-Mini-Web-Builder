@@ -2,7 +2,7 @@
 
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\FrontController;
+use App\Http\Controllers\API\V1\FrontController;
 
 /*
 |--------------------------------------------------------------------------
